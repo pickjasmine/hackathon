@@ -1,7 +1,6 @@
 const express = require('express');
 const got  = require('got');
 const app = express();
-
 const token = "bcbf0854-97f5-4135-9224-d9a13a5b2dcf";
 
 app.get('/', function (req, res) {
@@ -13,11 +12,26 @@ app.listen(8080, function () {
 });
 
 function test() {
-  got("https://jsonplaceholder.typicode.com/posts/1")
-    .then(response => {
-      let result = JSON.parse(response.body)
-      console.log(result.body);
-    });
-}
+  return got.post('https://api.mixmax.com/v1/send',{
+    body: JSON.stringify({
 
-test();
+      "message": {
+        "to": "musikmann7448@gmail.com",
+        "subject": "This is my subject",
+        "html" : "test"
+      }
+    }),
+      headers: {
+        'content-type': "application/json",
+        'X-API-TOKEN': token
+      }
+    }
+  )
+}
+/*.then(response => {
+let result = JSON.parse(response.body)
+console.log(result.body);
+});
+}
+*/
+test().catch(console.log);
