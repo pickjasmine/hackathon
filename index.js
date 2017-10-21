@@ -9,3 +9,13 @@ app.get('/', function (req, res) {
 app.listen(8080, function () {
   console.log('Example app listening on port 8080!')
 });
+
+function test() {
+  got("https://jsonplaceholder.typicode.com/posts/1")
+    .then(response => {
+      let result = JSON.parse(response.body)
+      console.log(result.body);
+    });
+}
+
+test();
