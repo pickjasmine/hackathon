@@ -1,12 +1,13 @@
 const express = require('express');
-const got  = require('got');
 const app = express();
+const got  = require('got');
+const fs = require('fs');
+const cheerio = require('cheerio');
+const $ = cheerio.load(fs.readFileSync("./web-app/index.html"));
 const token = "964c73e3-d289-4cb7-a895-e9ebd1305b1d";
 
 app.set('port', 8080);
-
 app.use(express.static('web-app'));
-
 app.listen(8080, function() {
   console.log('Server started on port 8080!')
 });
@@ -21,6 +22,11 @@ getJobs(github_url)
 .catch((err) => {
   console.log("Oh no! Something went wrong!");
 })
+
+// TODO: Use Cheerio to Grab From Data
+// keywords = description [in url]
+// location = location [in url]
+// job type = if full time, full_time=true [in url]
 
 async function getJobs(url) {
   let json;
