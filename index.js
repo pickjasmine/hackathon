@@ -30,11 +30,11 @@ function getJobs(url) {
       // jobs.push(data[i].location);
       // jobs.push(data[i].company);
       // jobs.push(data[i].url);
-      console.log(jobs);
+      // console.log(jobs);
     }
   })
-  console.log(jobs);
-  //return jobs;
+  // console.log(jobs);
+  // return jobs;
 }
 
 //   async function sendEmail() {
