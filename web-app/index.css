@@ -47,7 +47,7 @@ body {
     text-align: left;
     width: 20%; }
   .rightSide input[type='text'] {
-    width: 65%; }
+    width: 30%; }
 
 ul {
   padding-left: 50px; }
@@ -61,7 +61,7 @@ ul {
 .experience label, .jobType label {
   font-size: 16px; }
 
-button, select, input[type='text'] {
+button, select, option, input[type='text'] {
   color: black; }
 
 select, input[type='text'] {
@@ -86,10 +86,11 @@ h2, h3 {
   color: white;
   position: fixed;
   bottom: 25px;
-  left: 100px; }
+  left: 150px; }
 
 .draggable {
-  padding: 5px; }
+  padding: 5px;
+  height: fit-content; }
 
 .ui-draggable-dragging {
   border: solid 2px aqua; }
@@ -99,5 +100,12 @@ h2, h3 {
 
 .ui-droppable-hover {
   color: aqua; }
+
+#tooManyKeywords {
+  font-size: 14px;
+  font-style: italic; }
+
+.fa-plus {
+  color: white; }
 
 /*# sourceMappingURL=index.css.map */
