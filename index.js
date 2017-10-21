@@ -16,42 +16,43 @@ app.listen(8080, function() {
 
 let github_url="https://jobs.github.com/positions.json?description=python&location=sf&full_time=true";
 
-getJobs(github_url);
+getJobs(github_url)
+.then(sendEmail)
+.catch((err) => {
+  console.log("Oh no! Something went wrong!");
+})
 
-function getJobs(url) {
+async function getJobs(url) {
   let json;
   let jobs = [];
-  got(github_url)
+
+  await got(github_url)
   .then(response => {
     let data = JSON.parse(response.body);
-    console.log(data.length);
     for (let i = 0; i < data.length; i++) {
-      // jobs.push(data[i].title);
-      // jobs.push(data[i].location);
-      // jobs.push(data[i].company);
-      // jobs.push(data[i].url);
-      // console.log(jobs);
+      jobs.push(data[i].title, data[i].company, data[i].location, data[i].url);
     }
   })
-  // console.log(jobs);
-  // return jobs;
+  return jobs;
 }
 
-//   async function sendEmail() {
-//     const result = await getBody();
-//   }
-//     got.post("https://api.mixmax.com/v1/send", {
-//       body: JSON.stringify({
-//         "message": {
-//           "to": "musikmann7448@gmail.com",
-//           "subject": "Job listing",
-//           "html": emailBody
-//         }
-//       }),
-//       headers: {
-//         "content-type": "application/json",
-//         "X-API-TOKEN": token
-//       }
-//     })
-//   }, 3000);
-// }
+async function sendEmail(json) {
+  const result = await getJobs();
+
+  await got.post("https://api.mixmax.com/v1/send", {
+    headers: {
+      "content-type": "application/json",
+      "X-API-TOKEN": token
+    },
+    body: JSON.stringify({
+      "message": {
+        "to": "musikmann7448@gmail.com",
+        "subject": "Job Listing",
+        "html": "hey this is just a quick test"
+      }
+    })
+  })
+  .then(response => {
+    console.log(response.statusCode);
+  })
+}
