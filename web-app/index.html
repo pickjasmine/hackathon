@@ -2,52 +2,155 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Work4u</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>Work4U</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/css" rel="stylesheet">
-    <script
-            src="https://code.jquery.com/jquery-3.2.1.min.js"
-            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-            crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"
+          rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="index.js"></script>
+    <link href="index.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 <div class="main">
-
-    <h1>Work4u</h1>
+    <div id="title">
+        <h1>Work4U</h1>
+        <p>Tell us what you're looking for, and let us do the work.</p>
+    </div>
 
     <div class="container-fluid">
         <div class="row">
+            <form>
 
-            <div class="col-xs-6">
+                <div class="col-xs-6 leftSide">
+                    <h3>What's your dream job?</h3>
+
+                    <table>
+                        <tr>
+                            <td>
+                                <label for="locationInput">Location</label>
+                            </td>
+                            <td>
+                                <input type="text" id="locationInput" name="locationInput"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="searchRadius">Search Radius</label>
+                            </td>
+                            <td>
+                                <select id="searchRadius" name="searchRadius">
+                                    <option value="noLimit">Anywhere</option>
+                                    <option value="5">Within 5 Miles</option>
+                                    <option value="25">Within 25 Miles</option>
+                                    <option value="50">Within 50 Miles</option>
+                                    <option value="100">Within 100 Miles</option>
+                                </select><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Experience Level</label>
+                            </td>
+                            <td>
+                                <div class="experience">
+                                    <label for="entryLevel">Entry Level</label>
+                                    <input type="checkbox" id="entryLevel" name="entryLevel">
+
+                                    <label for="midLevel">Mid Level</label>
+                                    <input type="checkbox" id="midLevel" name="midLevel">
+
+                                    <label for="seniorLevel">Senior Level</label>
+                                    <input type="checkbox" id="seniorLevel" name="seniorLevel">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Job Type</label>
+                            </td>
+                            <td>
+                                <div class="jobType">
+                                    <label for="fullTime">Full Time</label>
+                                    <input type="checkbox" id="fullTime" name="fullTime"/>
+                                    <label for="partTime">Part Time</label>
+                                    <input type="checkbox" id="partTime" name="partTime"/>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="keywordInput">Keywords</label>
+
+                            </td>
+                            <td>
+                                <input type="text" id="keywordInput" name="keywordInput"/>
+                                <button type="button" id="addKeyword" name="addKeyword"><i class="fa fa-plus"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+
+                            </td>
+                            <td>
+                                <ul>
+                                    <span id="keywordList"></span>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <div id="droppable">
+                        <i class="fa fa-ban fa-2x droppable"></i>
+                    </div>
+                </div>
+
+                <div class="col-xs-6 rightSide">
+                    <h2>How do you want to be contacted?</h2>
+                    <div class="contactOptions">
+                        <label for="email">Email</label>
+                        <input type="checkbox" id="email" name="email" onclick="toggleEmail();">
+
+                        <label for="text">Text</label>
+                        <input type="checkbox" id="text" name="text" onclick="toggleText();">
+
+                        <label for="slack">Slack</label>
+                        <input type="checkbox" id="slack" name="slack" onclick="toggleSlack();">
+                    </div>
 
 
-                <h2>Keywords for jobs</h2>
-                <input type="text" id="keywordInput" name="keywordInput"/>
+                    <div class="showEmail" style="display: none">
 
+                        <label for="emailInput">Email</label>
 
-                <h2>Location</h2>
-                <input type="text" id="locationInput" name="locationInput"/>
+                        <input type="text" id="emailInput" name="emailInput"/>
 
-                <h2>Search Radius</h2>
-                <input type="text" id="locationRadiusInput" name="locationRadiusInput"/>
+                    </div>
+                    <div class="showText" style="display: none">
 
-                <h2>Experience Level</h2>
-                <input type="text" id="experienceLevelInput" name="experienceLevelInput"/>
+                        <label for="phoneInput">Phone Number</label>
 
-                <h2>Full/Part Time</h2>
-                <input type="checkbox" id="fullTime" name="fullTime"/>
-                <input type="checkbox" id="partTime" name="partTime"/>
-            </div>
+                        <input type="text" id="phoneInput" name="phoneInput"/>
 
-            <div class="col-xs-6">
+                    </div>
+                    <div class="showSlack" style="display: none">
 
-                <h2>Email</h2>
+                        <label for="slackInput">Slack</label>
 
-                <h2>Phone Number</h2>
-            </div>
+                        <input type="text" id="slackInput" name="slackInput"/>
 
-            <!--radio buttons for text, email, slack -->
+                    </div>
 
+                    <button type="submit" id="submit" name="submit" value="submit">Sign me up!</button>
+
+                </div>
+
+                <!--radio buttons for text, email, slack -->
+
+            </form>
         </div>
 
     </div>
