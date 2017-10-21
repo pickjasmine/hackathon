@@ -63,7 +63,7 @@ body {
     width: 20%;
   }
       input[type='text'] {
-        width: 55%;
+        width: 30%;
   }
 }
 
@@ -137,4 +137,8 @@ h2, h3 {
 #tooManyKeywords {
   font-size: 14px;
   font-style: italic;
+}
+
+.fa-plus {
+  color: white;
 }
