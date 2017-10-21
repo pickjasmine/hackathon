@@ -12,13 +12,11 @@ app.listen(8080, function() {
 });
 
 function getBody() {
-  let newVar = null;
+  let emailBody;
   got("jsonplaceholder.typicode.com/posts/1")
   .then(response => {
     let data = JSON.parse(response.body);
-    test = data.title;
-    newVar = test;
-    console.log(newVar)
+    emailBody = data.title;
   })
   setTimeout(function() {
     got.post("https://api.mixmax.com/v1/send", {
@@ -26,7 +24,7 @@ function getBody() {
         "message": {
           "to": "musikmann7448@gmail.com",
           "subject": "Job listing",
-          "html": newVar + "test body"
+          "html": emailBody
         }
       }),
       headers: {
