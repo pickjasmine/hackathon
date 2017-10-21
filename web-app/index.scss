@@ -28,6 +28,7 @@ body {
   p {
     font-size: 24px;
     font-style: italic;
+    font-weight: lighter;
   }
 }
 
@@ -40,6 +41,16 @@ body {
     margin: 0 auto;
     td {
       padding: 10px 5px;
+    }
+  }
+  label {
+    font-weight: 300;
+    font-size: 24px;
+  }
+  .experience, .jobType {
+    label {
+      font-weight: 500;
+      font-size: 16px;
     }
   }
 }
@@ -56,6 +67,8 @@ body {
     label {
       width: fit-content;
       padding: 0 10px;
+      font-weight: 300;
+      font-size: 24px;
     }
   }
   label {

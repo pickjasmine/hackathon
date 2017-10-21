@@ -20,7 +20,8 @@ body {
     font-size: 56px; }
   #title p {
     font-size: 24px;
-    font-style: italic; }
+    font-style: italic;
+    font-weight: lighter; }
 
 .leftSide {
   height: 100vh;
@@ -31,6 +32,12 @@ body {
     margin: 0 auto; }
     .leftSide table td {
       padding: 10px 5px; }
+  .leftSide label {
+    font-weight: 300;
+    font-size: 24px; }
+  .leftSide .experience label, .leftSide .jobType label {
+    font-weight: 500;
+    font-size: 16px; }
 
 .rightSide {
   height: 40vh;
@@ -42,7 +49,9 @@ body {
     margin: 0 auto; }
     .rightSide .contactOptions label {
       width: fit-content;
-      padding: 0 10px; }
+      padding: 0 10px;
+      font-weight: 300;
+      font-size: 24px; }
   .rightSide label {
     text-align: left;
     width: 20%; }
