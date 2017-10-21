@@ -41,9 +41,4 @@ $(document).ready(function () {
             keywordCount--;
         }
     });
-
-    $('#submit').click(function() {
-
-    })
-
 });
