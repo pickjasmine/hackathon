@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Work4U</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"
@@ -11,148 +12,174 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="index.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Bungee+Shade|Unica+One" rel="stylesheet">
     <link href="index.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 <div class="main">
     <div id="title">
         <h1>Work4U</h1>
-        <p>Tell us what you're looking for, and let us do the work.</p>
-        <h6>Erik felt the need to contribute at lease one thing to this. </p>
+        <p>Let us do the work <span class="primary">4</span> <span class="secondary">U</span>.</p>
     </div>
 
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <form id="jobSearchForm">
+                <!--search options-->
+                <div class="col-xs-12 col-md-6 leftSide">
+                    <h2 class="secondary">Describe your dream job</h2>
+                    <!--location-->
+                    <div class="row locationGroup">
+                        <div class="col-xs-12 col-md-4">
+                            <label for="locationInput">Location</label>
+                        </div>
+                        <div class="col-xs-12 col-md-8">
+                            <input type="text" id="locationInput" name="locationInput"/>
+                        </div>
+                    </div>
 
-                <div class="col-xs-6 leftSide">
-                    <h3>Describe your dream job</h3>
+                    <!--search radius
+                    <div class="row searchRadiusGroup">
+                        <div class="col-xs-12 col-md-4">
+                            <label for="searchRadius">Search Radius</label>
+                        </div>
+                        <div class="col-xs-12 col-md-8">
+                            <select id="searchRadius" name="searchRadius">
+                                <option value="noLimit">Anywhere</option>
+                                <option value="5">Within 5 Miles</option>
+                                <option value="25">Within 25 Miles</option>
+                                <option value="50">Within 50 Miles</option>
+                                <option value="100">Within 100 Miles</option>
+                            </select>
+                        </div>
+                    </div>
+                    -->
 
-                    <table>
-                        <tr>
-                            <td>
-                                <label for="locationInput">Location</label>
-                            </td>
-                            <td>
-                                <input type="text" id="locationInput" name="locationInput"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="searchRadius">Search Radius</label>
-                            </td>
-                            <td>
-                                <select id="searchRadius" name="searchRadius">
-                                    <option value="noLimit">Anywhere</option>
-                                    <option value="5">Within 5 Miles</option>
-                                    <option value="25">Within 25 Miles</option>
-                                    <option value="50">Within 50 Miles</option>
-                                    <option value="100">Within 100 Miles</option>
-                                </select><br>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>Experience Level</label>
-                            </td>
-                            <td>
-                                <div class="experience">
-                                    <label for="entryLevel">Entry Level</label>
-                                    <input type="checkbox" id="entryLevel" name="entryLevel">
+                    <!--job experience level -->
+                    <div class="row experienceGroup">
+                        <div class="col-xs-12 col-md-4">
+                            <label>Experience Level</label>
+                        </div>
+                        <div class="col-xs-12 col-md-8 experience">
+                            <input type="checkbox" id="entryLevel" name="entryLevel">
+                            <label for="entryLevel">Entry Level</label>
+                            <br>
+                            <input type="checkbox" id="midLevel" name="midLevel">
+                            <label for="midLevel">Mid Level</label>
+                            <br>
+                            <input type="checkbox" id="seniorLevel" name="seniorLevel">
+                            <label for="seniorLevel">Senior Level</label>
+                        </div>
+                    </div>
 
-                                    <label for="midLevel">Mid Level</label>
-                                    <input type="checkbox" id="midLevel" name="midLevel">
 
-                                    <label for="seniorLevel">Senior Level</label>
-                                    <input type="checkbox" id="seniorLevel" name="seniorLevel">
+                    <!--job type-->
+                    <div class="row jobTypeGroup">
+                        <div class="col-xs-12 col-md-4">
+                            <label>Job Type</label>
+                        </div>
+                        <div class="col-xs-12 col-md-4 jobType">
+                            <input type="checkbox" id="fullTime" name="fullTime"/>
+                            <label for="fullTime">Full Time</label>
+                            <br>
+                            <input type="checkbox" id="partTime" name="partTime"/>
+                            <label for="partTime">Part Time</label>
+                        </div>
+                    </div>
+
+                    <!--keywords-->
+                    <div class="row keywordsGroup">
+                        <div class="col-xs-12 col-md-4">
+                            <label for="keywordInput">Keywords</label>
+                        </div>
+                        <div class="col-xs-12 col-md-8">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <input type="text" id="keywordInput" name="keywordInput"/>
                                 </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>Job Type</label>
-                            </td>
-                            <td>
-                                <div class="jobType">
-                                    <label for="fullTime">Full Time</label>
-                                    <input type="checkbox" id="fullTime" name="fullTime"/>
-                                    <label for="partTime">Part Time</label>
-                                    <input type="checkbox" id="partTime" name="partTime"/>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-1">
+                                    <!--blank-->
                                 </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="keywordInput">Keywords</label>
+                                <div class="col-xs-4">
+                                    <i id="addKeyword" class="fa fa-plus fa-2x"></i>
+                                </div>
+                                <div class="col-xs-4">
+                                    <i class="fa fa-ban fa-2x droppable"></i>
+                                </div>
+                                <div class="col-xs-3">
+                                    <!--blank-->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <ul>
+                                        <span id="keywordList"></span>
+                                    </ul>
+                                </div>
+                            </div>
 
-                            </td>
-                            <td>
-                                <input type="text" id="keywordInput" name="keywordInput"/>
-                                <i id="addKeyword" class="fa fa-plus"></i>
-
-                                <span id="tooManyKeywords"></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-
-                            </td>
-                            <td>
-                                <ul>
-                                    <span id="keywordList"></span>
-                                </ul>
-                            </td>
-                        </tr>
-                    </table>
-                    <br>
-                    <div id="droppable">
-                        <i class="fa fa-ban fa-2x droppable"></i>
+                        </div>
                     </div>
-
-                    <input type="text" id="keywords" name="keywords" style="display: none"/>
-                </div>
-
-                <div class="col-xs-6 rightSide">
-                    <h2>How do you want to be contacted?</h2>
-                    <div class="contactOptions">
-                        <label for="email">Email</label>
-                        <input type="checkbox" id="email" name="email" onclick="toggleEmail();">
-
-                        <label for="text">Text</label>
-                        <input type="checkbox" id="text" name="text" onclick="toggleText();">
-
-                        <label for="slack">Slack</label>
-                        <input type="checkbox" id="slack" name="slack" onclick="toggleSlack();">
-                    </div>
-
-
-                    <div class="showEmail" style="display: none">
-
-                        <label for="emailInput">Email</label>
-
-                        <input type="text" id="emailInput" name="emailInput"/>
-
-                    </div>
-                    <div class="showText" style="display: none">
-
-                        <label for="phoneInput">Phone Number</label>
-
-                        <input type="text" id="phoneInput" name="phoneInput"/>
-
-                    </div>
-                    <div class="showSlack" style="display: none">
-
-                        <label for="slackInput">Slack</label>
-
-                        <input type="text" id="slackInput" name="slackInput"/>
-
-                    </div>
-
-                    <button type="button" id="submit" name="submit" value="submit" onclick="createJSON();">Sign me up!</button>
 
                 </div>
+                <div class="col-md-1"></div>
 
-                <!--radio buttons for text, email, slack -->
+                <!--user contact information-->
+                <div class="col-xs-12 col-md-5 rightSide">
+                    <h2 class="primary">Point of Contact</h2>
+                    <div class="row contactOptions">
+                        <div class="col-xs-4">
+                            <label for="email">Email</label>
+                            <input type="checkbox" id="email" name="email" onclick="toggleEmail();">
+                        </div>
+
+                        <div class="col-xs-4">
+                            <label for="text">Text</label>
+                            <input type="checkbox" id="text" name="text" onclick="toggleText();">
+                        </div>
+
+                        <div class="col-xs-4">
+                            <label for="slack">Slack</label>
+                            <input type="checkbox" id="slack" name="slack" onclick="toggleSlack();">
+                        </div>
+                    </div>
+
+                    <!--contact info drop downs-->
+                    <div class="row showEmail" style="display: none">
+                        <div class="col-xs-4">
+                            <label for="emailInput" class="primary">Email</label>
+                        </div>
+                        <div class="col-xs-8">
+                            <input type="text" id="emailInput" name="emailInput"/>
+                        </div>
+                    </div>
+
+                    <div class="row showText" style="display: none">
+                        <div class="col-xs-4">
+                            <label for="phoneInput" class="secondary">Phone</label>
+                        </div>
+                        <div class="col-xs-8">
+                            <input type="text" id="phoneInput" name="phoneInput"/>
+                        </div>
+                    </div>
+
+                    <div class="row showSlack" style="display: none">
+                        <div class="col-xs-4">
+                            <label for="slackInput" class="primary">Slack</label>
+                        </div>
+                        <div class="col-xs-8">
+                            <input type="text" id="slackInput" name="slackInput"/>
+                        </div>
+                    </div>
+
+                    <div class="submit">
+                        <button type="button" id="submit" name="submit" value="submit" onclick="createJSON();">Sign me
+                            up!<i class="fa fa-chevron-right" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
 
             </form>
         </div>

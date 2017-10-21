@@ -1,11 +1,13 @@
 $primaryColor: aqua;
-$opaqueWhite: rgba(255, 255, 255, 0.4);
+$secondaryColor: #ff701d;
+$opaqueWhite: rgba(255, 255, 255, 0.8);
 
 * {
   padding: 0;
   margin: 0;
   color: white;
-  font-size: 20px;
+  font-size: 24px;
+  font-family: 'Unica One', cursive;
 }
 
 body {
@@ -14,7 +16,6 @@ body {
   background-repeat: no-repeat;
   background-position: top center;
   background-color: rgba(0, 0, 0, 0.6);
-
   background-blend-mode: overlay;
 }
 
@@ -23,65 +24,72 @@ body {
   text-align: center;
   h1 {
     margin: 0;
-    font-size: 56px;
+    font-size: 96px;
+    font-family: 'Bungee Shade', cursive;
   }
   p {
-    font-size: 24px;
-    font-style: italic;
-    font-weight: lighter;
+    font-size: 32px;
+    font-weight: 200;
   }
 }
 
-.leftSide {
-  height: 100vh;
-  position: fixed;
-  top: 20%;
-  table {
-    width: 75%;
-    margin: 0 auto;
-    td {
-      padding: 10px 5px;
-    }
-  }
-  label {
-    font-weight: 300;
-    font-size: 24px;
-  }
-  .experience, .jobType {
-    label {
-      font-weight: 500;
-      font-size: 16px;
-    }
-  }
-}
-
-.rightSide {
-  height: 40vh;
-  position: fixed;
-  top: 30%;
-  right: 0;
+h2 {
   text-align: center;
+  text-decoration: underline;
+  font-size: 32px;
+}
 
-  .contactOptions {
-    margin: 0 auto;
-    label {
-      width: fit-content;
-      padding: 0 10px;
-      font-weight: 300;
-      font-size: 24px;
-    }
+.experience label, .jobType label, .contactOptions label {
+  font-weight: 100;
+}
+
+button, select, option, input[type='text'] {
+  margin-top: 3px;
+  color: black;
+}
+
+.fa {
+  width: fit-content;
+  text-align: left;
+}
+
+.fa-plus {
+  color: $primaryColor;
+  &:hover {
+    color: #38b25c;
   }
-  label {
-    text-align: left;
-    width: 20%;
+}
+
+.fa-ban {
+  color: $secondaryColor;
+  &:hover {
+    color: red;
   }
-      input[type='text'] {
-        width: 30%;
-  }
+}
+
+.draggable {
+  list-style-type: none;
+  padding: 5px;
+  width: fit-content;
+  height: 50px;
+  background-color: $opaqueWhite;
+  color: $secondaryColor;
+  font-weight: 500;
+}
+
+.ui-draggable-dragging {
+  border: solid 2px $primaryColor;
+}
+
+.ui-droppable-active {
+  color: $primaryColor;
+}
+
+.ui-droppable-hover {
+  color: $secondaryColor;
 }
 
 ul {
-  padding-left: 50px;
   li {
     list-style-type: none;
     background-color: $opaqueWhite;
@@ -91,67 +99,52 @@ ul {
   }
 }
 
-.experience label, .jobType label {
-  font-size: 16px;
+input[type='text'] {
+  width: 65%;
 }
 
-button, select, option, input[type='text'] {
-  color: black;
+.col-xs-8 input[type='text'] {
+  width: 65%;
 }
 
-select, input[type='text'] {
-  width: 90%;
+.primary {
+  color: $primaryColor;
+  font-size: 32px;
 }
 
-button {
-  padding: 2px 5px;
+.secondary {
+  color: $secondaryColor;
+  font-size: 32px;
 }
 
-i {
-  color: black;
-}
-
-h2, h3 {
+.submit {
+  position: fixed;
+  bottom: 15%;
+  right: 15%;
   text-align: center;
-}
-
-#submit {
-  margin-top: 50px;
-  &:hover {
-    border-bottom: solid 2px $primaryColor;
-    border-right: solid 2px $primaryColor;
+  button {
+    font-size: 48px;
+    margin: 0 auto;
+    background-color: $opaqueWhite;
+    border: solid 2px $primaryColor;
+    i {
+      color: $secondaryColor;
+    }
+    &:hover {
+      border: dashed 2px $secondaryColor;
+      i {
+        color: $primaryColor;
+      }
+    }
   }
 }
 
-.fa-ban {
-  color: white;
-  position: fixed;
-  bottom: 25px;
-  left: 150px;
+.row {
+  margin-top: 10px;
 }
 
-.draggable {
-  padding: 5px;
-  height: fit-content;
+.experienceGroup {
+  border-bottom: solid 1px $primaryColor;
 }
 
-.ui-draggable-dragging {
-    border: solid 2px $primaryColor;
-}
 
-.ui-droppable-active {
-  color: red;
-}
-
-.ui-droppable-hover {
-  color: aqua;
-}
-
-#tooManyKeywords {
-  font-size: 14px;
-  font-style: italic;
-}
-
-.fa-plus {
-  color: white;
-}

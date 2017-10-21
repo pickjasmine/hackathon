@@ -89,7 +89,7 @@ $(document).ready(function () {
                 cursor: 'move',
                 helper: 'clone',
                 grid: [30, 30],
-                cursorAt: {bottom: 0, right: 0}
+                cursorAt: {top: 0, left: 0}
             });
         } else {
             $('#keywordInput').val('Sorry, 3 keywords max');

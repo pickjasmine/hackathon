@@ -2,7 +2,8 @@
   padding: 0;
   margin: 0;
   color: white;
-  font-size: 20px; }
+  font-size: 24px;
+  font-family: 'Unica One', cursive; }
 
 body {
   background-image: url(images/stefan-stefancik-257625.jpg);
@@ -17,104 +18,98 @@ body {
   text-align: center; }
   #title h1 {
     margin: 0;
-    font-size: 56px; }
+    font-size: 96px;
+    font-family: 'Bungee Shade', cursive; }
   #title p {
-    font-size: 24px;
-    font-style: italic;
-    font-weight: lighter; }
+    font-size: 32px;
+    font-weight: 200; }
 
-.leftSide {
-  height: 100vh;
-  position: fixed;
-  top: 20%; }
-  .leftSide table {
-    width: 75%;
-    margin: 0 auto; }
-    .leftSide table td {
-      padding: 10px 5px; }
-  .leftSide label {
-    font-weight: 300;
-    font-size: 24px; }
-  .leftSide .experience label, .leftSide .jobType label {
-    font-weight: 500;
-    font-size: 16px; }
+h2 {
+  text-align: center;
+  text-decoration: underline;
+  font-size: 32px; }
 
-.rightSide {
-  height: 40vh;
-  position: fixed;
-  top: 30%;
-  right: 0;
-  text-align: center; }
-  .rightSide .contactOptions {
-    margin: 0 auto; }
-    .rightSide .contactOptions label {
-      width: fit-content;
-      padding: 0 10px;
-      font-weight: 300;
-      font-size: 24px; }
-  .rightSide label {
-    text-align: left;
-    width: 20%; }
-  .rightSide input[type='text'] {
-    width: 30%; }
-
-ul {
-  padding-left: 50px; }
-  ul li {
-    list-style-type: none;
-    background-color: rgba(255, 255, 255, 0.4);
-    width: fit-content;
-    padding: 2px;
-    margin: 2px; }
-
-.experience label, .jobType label {
-  font-size: 16px; }
+.experience label, .jobType label, .contactOptions label {
+  font-weight: 100; }
 
 button, select, option, input[type='text'] {
+  margin-top: 3px;
   color: black; }
 
-select, input[type='text'] {
-  width: 90%; }
+.fa {
+  width: fit-content;
+  text-align: left; }
 
-button {
-  padding: 2px 5px; }
-
-i {
-  color: black; }
-
-h2, h3 {
-  text-align: center; }
-
-#submit {
-  margin-top: 50px; }
-  #submit:hover {
-    border-bottom: solid 2px aqua;
-    border-right: solid 2px aqua; }
+.fa-plus {
+  color: aqua; }
+  .fa-plus:hover {
+    color: #38b25c; }
 
 .fa-ban {
-  color: white;
-  position: fixed;
-  bottom: 25px;
-  left: 150px; }
+  color: #ff701d; }
+  .fa-ban:hover {
+    color: red; }
 
 .draggable {
+  list-style-type: none;
   padding: 5px;
-  height: fit-content; }
+  width: fit-content;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #ff701d;
+  font-weight: 500; }
 
 .ui-draggable-dragging {
   border: solid 2px aqua; }
 
 .ui-droppable-active {
-  color: red; }
-
-.ui-droppable-hover {
   color: aqua; }
 
-#tooManyKeywords {
-  font-size: 14px;
-  font-style: italic; }
+.ui-droppable-hover {
+  color: #ff701d; }
 
-.fa-plus {
-  color: white; }
+ul li {
+  list-style-type: none;
+  background-color: rgba(255, 255, 255, 0.8);
+  width: fit-content;
+  padding: 2px;
+  margin: 2px; }
+
+input[type='text'] {
+  width: 65%; }
+
+.col-xs-8 input[type='text'] {
+  width: 65%; }
+
+.primary {
+  color: aqua;
+  font-size: 32px; }
+
+.secondary {
+  color: #ff701d;
+  font-size: 32px; }
+
+.submit {
+  position: fixed;
+  bottom: 15%;
+  right: 15%;
+  text-align: center; }
+  .submit button {
+    font-size: 48px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: solid 2px aqua; }
+    .submit button i {
+      color: #ff701d; }
+    .submit button:hover {
+      border: dashed 2px #ff701d; }
+      .submit button:hover i {
+        color: aqua; }
+
+.row {
+  margin-top: 10px; }
+
+.experienceGroup {
+  border-bottom: solid 1px aqua; }
 
 /*# sourceMappingURL=index.css.map */
