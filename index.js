@@ -2,6 +2,8 @@ const express = require('express');
 const got  = require('got');
 const app = express();
 
+const token = "bcbf0854-97f5-4135-9224-d9a13a5b2dcf";
+
 app.get('/', function (req, res) {
   res.send('Hello World!')
 });
