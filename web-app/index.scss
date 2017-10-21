@@ -1,5 +1,4 @@
 $primaryColor: aqua;
-$secondaryColor: #8db8ae;
 $opaqueWhite: rgba(255, 255, 255, 0.4);
 
 * {
@@ -64,7 +63,7 @@ body {
     width: 20%;
   }
       input[type='text'] {
-        width: 65%;
+        width: 55%;
   }
 }
 
@@ -83,7 +82,7 @@ ul {
   font-size: 16px;
 }
 
-button, select, input[type='text'] {
+button, select, option, input[type='text'] {
   color: black;
 }
 
@@ -115,11 +114,12 @@ h2, h3 {
   color: white;
   position: fixed;
   bottom: 25px;
-  left: 100px;
+  left: 150px;
 }
 
 .draggable {
   padding: 5px;
+  height: fit-content;
 }
 
 .ui-draggable-dragging {
@@ -131,5 +131,10 @@ h2, h3 {
 }
 
 .ui-droppable-hover {
-  color: $primaryColor;
+  color: aqua;
+}
+
+#tooManyKeywords {
+  font-size: 14px;
+  font-style: italic;
 }
