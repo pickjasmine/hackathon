@@ -3,9 +3,9 @@ const got  = require('got');
 const app = express();
 const token = "964c73e3-d289-4cb7-a895-e9ebd1305b1d";
 
-app.get('/', function (req, res) {
-  res.send('Hello World!')
-});
+app.set('port', 8080);
+
+app.use(express.static('web-app'));
 
 app.listen(8080, function() {
   console.log('Server started on port 8080!')
