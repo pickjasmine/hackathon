@@ -76,7 +76,11 @@ ul li {
   margin: 2px; }
 
 input[type='text'] {
-  width: 65%; }
+  width: 65%;
+  border-radius: 5px}
+input:focus {
+  outline:none;
+}
 
 .col-xs-8 input[type='text'] {
   width: 65%; }
