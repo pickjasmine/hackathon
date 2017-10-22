@@ -2,8 +2,7 @@ const express = require('express');
 const got  = require('got');
 const fs = require('fs');
 const parser = require('body-parser');
-const keys = require('./keys.json')
-const IncomingWebhook = require('@slack/client').IncomingWebhook;
+const keys = require('./keys.json');
 const WebClient = require('@slack/client').WebClient;
 const twilio = require('twilio');
 const app = express();
@@ -20,7 +19,6 @@ app.post('/submit', function(req, res) {
 
   // Assumes the following fields are provided
   let location = `${data.location}`;
-  let job_type = data.jobType[0].toString();
   let keywords = data.keywords;
   let email = `${data.email}`
   let phone = "+1" + data.phoneNumber
@@ -47,11 +45,11 @@ app.post('/submit', function(req, res) {
   }
 
   if (slack != undefined) {
-    getJobs(url).then(function(result) {testSlack(result, slack)});
+    getJobs(url).then(function(result) {sendSlack(result, slack)});
   }
 
   if (phone != undefined) {
-    getJobs(url).then(function(result) {testTwilio(result, phone)});
+    getJobs(url).then(function(result) {sendTwilio(result, phone)});
   }
 });
 
@@ -95,23 +93,29 @@ function sendEmail(json, email) {
   })
 }
 
-function testSlack(json, slack) {
+function sendSlack(json, slack) {
   let token = keys.SLACK_API_TOKEN;
   let web = new WebClient(token);
-  web.chat.postMessage('#joblistings', "test msg", function(err, res) {
+  let jobs = json;
+  let messageText = JSON.stringify(jobs.map(function(job) {
+    return ` ${job.title}, ${job.location}, ${job.company}, ${job.url}  `
+  }) + '');
+  console.log(slack);
+  console.log(json);
+  web.chat.postMessage(slack, messageText, function(err, res) {
     if (err) {
       console.log('Error:', err);
     } else {
-      console.log('Message sent: ', res);
+      console.log('Message sent')
     }
   });
 }
 
-function testTwilio(json, phone) {
- let client = new twilio(keys.TWILIO_SID, keys.TWILIO_API_KEY);
- client.messages.create({
-   to: phone,
-   from: '+13479675486',
-   body: 'Hello from Twilio!'
- });
+function sendTwilio(json, phone) {
+  let client = new twilio(keys.TWILIO_SID, keys.TWILIO_API_KEY);
+  client.messages.create({
+    to: phone,
+    from: '+13479675486',
+    body: 'Hello from Twilio!'
+  });
 }
