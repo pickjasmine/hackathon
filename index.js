@@ -1,23 +1,22 @@
 const express = require('express');
-const app = express();
 const got  = require('got');
 const fs = require('fs');
 const parser = require('body-parser');
 const keys = require('./keys.json')
-const mmtoken = "964c73e3-d289-4cb7-a895-e9ebd1305b1d";
-const twilio = require('twilio');
 const IncomingWebhook = require('@slack/client').IncomingWebhook;
+const WebClient = require('@slack/client').WebClient;
+const twilio = require('twilio');
+
+const app = express();
 
 app.set('port', 8080);
-
 app.use(express.static('web-app'));
-
 app.use(parser.json());
 
 app.post('/submit', function(req, res) {
-
   let url = "https://jobs.github.com/positions.json?description=";
   let data = req.body;
+  console.log(data);
   let i = 0;
 
   // Assumes the following fields are provided
@@ -43,7 +42,7 @@ app.post('/submit', function(req, res) {
 
   console.log(url);
 
-  getJobs(url)
+  console.log(getJobs(url));
 
   // async function all() {
   //   const address = await createURL();
@@ -51,7 +50,6 @@ app.post('/submit', function(req, res) {
   //   getJobs(address)
   //   sendEmail()
   //   }
-  
 });
 
 app.listen(8080, function() {
@@ -79,7 +77,7 @@ async function sendEmail(json) {
   await got.post("https://api.mixmax.com/v1/send", {
     headers: {
       "content-type": "application/json",
-      "X-API-TOKEN": mmtoken
+      "X-API-TOKEN": keys.MIXMAX_API_KEY
     },
     body: JSON.stringify({
       "message": {
@@ -97,10 +95,9 @@ async function sendEmail(json) {
 }
 
 function testSlack() {
-  var WebClient = require('@slack/client').WebClient;
-  var token = process.env.SLACK_API_TOKEN || 'xoxp-259705158691-259267103377-259294246432-dc346552b350bbca6f64aba3214fee43';
-  var web = new WebClient(token);
-  web.chat.postMessage('#joblistings', jobList, function(err, res) {
+  let token = keys.SLACK_API_TOKEN;
+  let web = new WebClient(token);
+  web.chat.postMessage('#joblistings', "test msg", function(err, res) {
     if (err) {
       console.log('Error:', err);
     } else {
@@ -109,9 +106,8 @@ function testSlack() {
   });
 }
 
-
 function testTwilio() {
- var client = new twilio('AC233d913b9e82ceafb883f93e451224d3', '78969c0e712aaedceb1c775c7c86d12d');
+ let client = new twilio(keys.TWILIO_SID, keys.TWILIO_API_KEY);
  client.messages.create({
    to: '+13312628169',
    from: '+13479675486',
