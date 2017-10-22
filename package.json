@@ -17,9 +17,10 @@
   },
   "homepage": "https://github.com/pickjasmine/hackathon#readme",
   "dependencies": {
-    "body-parser": "^1.18.2",
     "@slack/client": "^3.14.1",
+    "body-parser": "^1.18.2",
     "express": "^4.16.2",
-    "got": "^7.1.0"
+    "got": "^7.1.0",
+    "twilio": "^3.9.0"
   }
 }

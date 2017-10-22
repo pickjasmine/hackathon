@@ -9,34 +9,60 @@ const twilio = require('twilio');
 const IncomingWebhook = require('@slack/client').IncomingWebhook;
 
 app.set('port', 8080);
+
 app.use(express.static('web-app'));
+
 app.use(parser.json());
+
 app.post('/submit', function(req, res) {
-  res.send('success!')
-  console.log(req.body);
-})
+
+  let url = "https://jobs.github.com/positions.json?description=";
+  let data = req.body;
+  let i = 0;
+
+  // Assumes the following fields are provided
+  let location = `${data.location}`;
+  let job_type = data.jobType[0].toString();
+  let keywords = data.keywords
+
+  while (i < keywords.length) {
+    // No + if there's only one search term
+    if (keywords[i] != undefined) {
+      url += keywords[i];
+      url += "+";
+      i++;
+    }
+  }
+
+  url+="&"
+  url+="location=" + location
+
+  if (data.jobType[0] == "fullTime") {
+    url += "&full_time=true"
+  }
+
+  console.log(url);
+
+  getJobs(url)
+
+  // async function all() {
+  //   const address = await createURL();
+  //   console.log(address);
+  //   getJobs(address)
+  //   sendEmail()
+  //   }
+  
+});
+
 app.listen(8080, function() {
   console.log('Server started on port 8080!')
 });
 
-// TODO - Dynamic URL Creation
-// Using a test query for now...
-
-let github_url="https://jobs.github.com/positions.json?description=python&location=sf&full_time=true";
-
-// getJobs(github_url)
-// .then(sendEmail)
-// .catch((err) => {
-//   console.log("Oh no! Something went wrong!");
-//   console.log(err);
-// })
-
 async function getJobs(url) {
   let json;
   let jobs = [];
-  let job;
 
-  let response = await got(github_url)
+  const response = await got(url)
 
   let data = JSON.parse(response.body);
   for (let i = 0; i < data.length; i++) {
@@ -72,7 +98,6 @@ async function sendEmail(json) {
 
 function testSlack() {
   var WebClient = require('@slack/client').WebClient;
-  // var jobList =
   var token = process.env.SLACK_API_TOKEN || 'xoxp-259705158691-259267103377-259294246432-dc346552b350bbca6f64aba3214fee43';
   var web = new WebClient(token);
   web.chat.postMessage('#joblistings', jobList, function(err, res) {
