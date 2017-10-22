@@ -3,6 +3,7 @@ const app = express();
 const got  = require('got');
 const fs = require('fs');
 const parser = require('body-parser');
+const keys = require('./keys.json')
 const mmtoken = "964c73e3-d289-4cb7-a895-e9ebd1305b1d";
 const twilio = require('twilio');
 const IncomingWebhook = require('@slack/client').IncomingWebhook;
