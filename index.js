@@ -6,7 +6,6 @@ const keys = require('./keys.json')
 const IncomingWebhook = require('@slack/client').IncomingWebhook;
 const WebClient = require('@slack/client').WebClient;
 const twilio = require('twilio');
-
 const app = express();
 
 app.set('port', 8080);
@@ -16,8 +15,7 @@ app.use(parser.json());
 app.post('/submit', function(req, res) {
   let url = "https://jobs.github.com/positions.json?description=";
   let data = req.body;
-  console.log(data);
-  let i = 0;
+  let i = 1;
 
   // Assumes the following fields are provided
   let location = `${data.location}`;
@@ -42,14 +40,14 @@ app.post('/submit', function(req, res) {
 
   console.log(url);
 
-  console.log(getJobs(url));
-
-  // async function all() {
-  //   const address = await createURL();
-  //   console.log(address);
-  //   getJobs(address)
-  //   sendEmail()
-  //   }
+async function all() {
+  await getJobs(url)
+  .then(function(result) {
+    console.log(result);
+    sendEmail(result)
+  })
+}
+  all();
 });
 
 app.listen(8080, function() {
@@ -69,12 +67,13 @@ async function getJobs(url) {
       title, location, company, url
     });
   }
+  console.log(jobs);
   return jobs;
 }
 
-async function sendEmail(json) {
-  const jobs = await getJobs();
-  await got.post("https://api.mixmax.com/v1/send", {
+function sendEmail(json) {
+  const jobs = json;
+  got.post("https://api.mixmax.com/v1/send", {
     headers: {
       "content-type": "application/json",
       "X-API-TOKEN": keys.MIXMAX_API_KEY
