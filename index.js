@@ -4,7 +4,7 @@ const got  = require('got');
 const fs = require('fs');
 const parser = require('body-parser');
 const keys = require('./keys.json')
-const mmtoken = "964c73e3-d289-4cb7-a895-e9ebd1305b1d";
+const mmtoken = "27c273c8-0784-4f9d-a33e-ebc779432d18";
 const twilio = require('twilio');
 const IncomingWebhook = require('@slack/client').IncomingWebhook;
 
@@ -18,40 +18,39 @@ app.post('/submit', function(req, res) {
 
   let url = "https://jobs.github.com/positions.json?description=";
   let data = req.body;
-  let i = 0;
+  let i = 1;
 
   // Assumes the following fields are provided
   let location = `${data.location}`;
   let job_type = data.jobType[0].toString();
-  let keywords = data.keywords
+  let keywords = data.keywords;
 
-  while (i < keywords.length) {
-    // No + if there's only one search term
-    if (keywords[i] != undefined) {
-      url += keywords[i];
-      url += "+";
-      i++;
+  if (keywords[0] != undefined) {
+    url += keywords[0];
+    while (i < keywords.length) {
+      if (keywords[i] != undefined) {
+        url += "+" + keywords[i];
+        i++;
+      }
     }
   }
 
-  url+="&"
-  url+="location=" + location
+  url+="&location=" + location
 
   if (data.jobType[0] == "fullTime") {
     url += "&full_time=true"
   }
-
   console.log(url);
-
-  getJobs(url)
-
   // async function all() {
   //   const address = await createURL();
   //   console.log(address);
   //   getJobs(address)
   //   sendEmail()
   //   }
-  
+  getJobs(url).then(function(result) {sendEmail(result)});
+  // while (getJobs(url) == 2) {
+  //   sendEmail(getJobs(url));
+  // }
 });
 
 app.listen(8080, function() {
@@ -62,8 +61,7 @@ async function getJobs(url) {
   let json;
   let jobs = [];
 
-  const response = await got(url)
-
+  const response = await got(url);
   let data = JSON.parse(response.body);
   for (let i = 0; i < data.length; i++) {
     let { title, location, company, url } = data[i];
@@ -74,9 +72,10 @@ async function getJobs(url) {
   return jobs;
 }
 
-async function sendEmail(json) {
-  const jobs = await getJobs();
-  await got.post("https://api.mixmax.com/v1/send", {
+function sendEmail(json) {
+  console.log(json);
+  const jobs = json;
+  got.post("https://api.mixmax.com/v1/send", {
     headers: {
       "content-type": "application/json",
       "X-API-TOKEN": mmtoken
@@ -111,10 +110,10 @@ function testSlack() {
 
 
 function testTwilio() {
- var client = new twilio('AC233d913b9e82ceafb883f93e451224d3', '78969c0e712aaedceb1c775c7c86d12d');
- client.messages.create({
-   to: '+13312628169',
-   from: '+13479675486',
-   body: 'Hello from Twilio!'
- });
+  var client = new twilio('AC233d913b9e82ceafb883f93e451224d3', '78969c0e712aaedceb1c775c7c86d12d');
+  client.messages.create({
+    to: '+13312628169',
+    from: '+13479675486',
+    body: 'Hello from Twilio!'
+  });
 }
