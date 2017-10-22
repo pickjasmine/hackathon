@@ -66,3 +66,17 @@ async function sendEmail(json) {
     console.log(response.statusCode);
   })
 }
+
+function testSlack() {
+  var WebClient = require('@slack/client').WebClient;
+
+  var token = process.env.SLACK_API_TOKEN || 'xoxp-259705158691-259267103377-259294246432-dc346552b350bbca6f64aba3214fee43';
+  var web = new WebClient(token);
+  web.chat.postMessage('#random', 'Hello there', function(err, res) {
+    if (err) {
+      console.log('Error:', err);
+    } else {
+      console.log('Message sent: ', res);
+    }
+  });
+}
