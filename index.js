@@ -15,12 +15,16 @@ app.use(parser.json());
 app.post('/submit', function(req, res) {
   let url = "https://jobs.github.com/positions.json?description=";
   let data = req.body;
+  console.log(data);
   let i = 1;
 
   // Assumes the following fields are provided
   let location = `${data.location}`;
   let job_type = data.jobType[0].toString();
   let keywords = data.keywords;
+  let email = `${data.email}`
+  let phone = "+1" + data.phoneNumber
+  let slack = "#" + data.slack
 
   if (keywords[0] != undefined) {
     url += keywords[0];
@@ -37,7 +41,18 @@ app.post('/submit', function(req, res) {
   if (data.jobType[0] == "fullTime") {
     url += "&full_time=true"
   }
-  getJobs(url).then(function(result) {sendEmail(result)});
+
+  if (email != undefined) {
+    getJobs(url).then(function(result) {sendEmail(result, email)});
+  }
+
+  if (slack != undefined) {
+    getJobs(url).then(function(result) {testSlack(result, slack)});
+  }
+
+  if (phone != undefined) {
+    getJobs(url).then(function(result) {testTwilio(result, phone)});
+  }
 });
 
 app.listen(8080, function() {
@@ -58,7 +73,7 @@ async function getJobs(url) {
   return jobs;
 }
 
-function sendEmail(json) {
+function sendEmail(json, email) {
   const jobs = json;
   got.post("https://api.mixmax.com/v1/send", {
     headers: {
@@ -67,8 +82,8 @@ function sendEmail(json) {
     },
     body: JSON.stringify({
       "message": {
-        "to": "musikmann7448@gmail.com",
-        "subject": "Job Listing",
+        "to": email,
+        "subject": "Job Listings 4 U!",
         "html": jobs.map(function(job) {
           return `${job.title} ${job.location} ${job.company} ${job.url}`
         }).join("<br/>")
@@ -80,7 +95,7 @@ function sendEmail(json) {
   })
 }
 
-function testSlack() {
+function testSlack(json, slack) {
   let token = keys.SLACK_API_TOKEN;
   let web = new WebClient(token);
   web.chat.postMessage('#joblistings', "test msg", function(err, res) {
@@ -92,10 +107,10 @@ function testSlack() {
   });
 }
 
-function testTwilio() {
+function testTwilio(json, phone) {
  let client = new twilio(keys.TWILIO_SID, keys.TWILIO_API_KEY);
  client.messages.create({
-   to: '+13312628169',
+   to: phone,
    from: '+13479675486',
    body: 'Hello from Twilio!'
  });
