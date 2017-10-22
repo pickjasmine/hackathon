@@ -2,6 +2,19 @@ $primaryColor: aqua;
 $secondaryColor: #ff701d;
 $opaqueWhite: rgba(255, 255, 255, 0.8);
 
+@mixin animate($name, $duration, $repeat) {
+  -webkit-animation: $name $duration $repeat;
+  -moz-animation: $name $duration $repeat;
+  -o-animation: $name $duration $repeat;
+  animation: $name $duration $repeat;
+}
+
+@mixin box-shadow($top, $left, $blur, $color) {
+  -webkit-box-shadow: $top $left $blur $color;
+  -moz-box-shadow: $top $left $blur $color;
+  box-shadow: $top $left $blur $color;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -13,8 +26,6 @@ $opaqueWhite: rgba(255, 255, 255, 0.8);
 body {
   background-image: url(images/stefan-stefancik-257625.jpg);
   background-size: cover;
-  background-repeat: no-repeat;
-  background-position: top center;
   background-color: rgba(0, 0, 0, 0.6);
   background-blend-mode: overlay;
 }
@@ -26,6 +37,9 @@ body {
     margin: 0;
     font-size: 96px;
     font-family: 'Bungee Shade', cursive;
+    //text-shadow: 1px 1px $secondaryColor;
+    @include animate(blinkText, 1s, infinite);
+    animation-direction: alternate;
   }
   p {
     font-size: 32px;
@@ -51,19 +65,20 @@ button, select, option, input[type='text'] {
 .fa {
   width: fit-content;
   text-align: left;
+
 }
 
 .fa-plus {
   color: $primaryColor;
   &:hover {
-    color: #38b25c;
+    text-shadow: 2px 1px $secondaryColor;
   }
 }
 
 .fa-ban {
   color: $secondaryColor;
   &:hover {
-    color: red;
+    text-shadow: 2px 1px $primaryColor;
   }
 }
 
@@ -118,20 +133,25 @@ input[type='text'] {
 }
 
 .submit {
+  width: 20%;
   position: fixed;
-  bottom: 15%;
-  right: 15%;
+  bottom: 5%;
+  right: 5%;
   text-align: center;
   button {
-    font-size: 48px;
+    border-radius: 5px;
+    font-size: 36px;
+    padding: 3px;
     margin: 0 auto;
     background-color: $opaqueWhite;
     border: solid 2px $primaryColor;
+    @include box-shadow(1px, 2px, 1px, $secondaryColor);
     i {
       color: $secondaryColor;
     }
     &:hover {
-      border: dashed 2px $secondaryColor;
+      border: solid 2px $secondaryColor;
+      @include box-shadow(1px, 2px, 1px, $primaryColor);
       i {
         color: $primaryColor;
       }
@@ -146,5 +166,34 @@ input[type='text'] {
 .experienceGroup {
   border-bottom: solid 1px $primaryColor;
 }
+
+@-webkit-keyframes blinkText {
+  0% {
+    //border: 1px solid $secondaryColor;
+    text-shadow: 1px 0px $secondaryColor;
+  }
+  100% {
+    //border: 1px solid $secondaryColor;
+  text-shadow: 3px 2px $primaryColor;
+  }
+}
+
+@keyframes blinkText {
+  0% {
+    //border: 1px solid $secondaryColor;
+    text-shadow: 1px 0px $secondaryColor;
+  }
+  100% {
+    //border: 1px solid $secondaryColor;
+    text-shadow: 3px 2px $primaryColor;
+  }
+}
+
+@keyframes sheen {
+  100% {
+    transform: rotateZ(60deg) translate(1em, -9em);
+  }
+}
+
 
 

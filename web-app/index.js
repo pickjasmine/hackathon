@@ -18,7 +18,7 @@ function makeRequest() {
         dataType: 'json',
         data: jsonBlob,
         type: 'POST',
-        contentType:"application/json; charset=utf-8",
+        contentType: "application/json; charset=utf-8",
         success: function (result) {
             console.log(results);
         },
@@ -88,7 +88,10 @@ $(document).ready(function () {
     let keywords = [];
 
     $('#addKeyword').click(function () {
-        if (keywordCount < 3) {
+        if ($('#keywordInput').val() === "") {
+            $('#keywordInput').val('Please enter a value');
+        }
+        else if (keywordCount < 3) {
             let keyword = $('#keywordInput').val();
             let keywordId = keyword.toLowerCase();
             $('#keywordList').append('<li id="' + keywordId + '" class="key draggable droppable ui-widget-content">' + keyword + '</li>');
@@ -100,8 +103,10 @@ $(document).ready(function () {
                 containment: '.leftSide',
                 cursor: 'move',
                 helper: 'clone',
-                grid: [30, 30],
-                cursorAt: {top: 0, left: 0}
+                cursorAt: {
+                    left: $(this).width() / 2,
+                    top: $(this).height() / 2
+                }
             });
         } else {
             $('#keywordInput').val('Sorry, 3 keywords max');

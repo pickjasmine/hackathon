@@ -8,8 +8,6 @@
 body {
   background-image: url(images/stefan-stefancik-257625.jpg);
   background-size: cover;
-  background-repeat: no-repeat;
-  background-position: top center;
   background-color: rgba(0, 0, 0, 0.6);
   background-blend-mode: overlay; }
 
@@ -19,7 +17,12 @@ body {
   #title h1 {
     margin: 0;
     font-size: 96px;
-    font-family: 'Bungee Shade', cursive; }
+    font-family: 'Bungee Shade', cursive;
+    -webkit-animation: blinkText 1s infinite;
+    -moz-animation: blinkText 1s infinite;
+    -o-animation: blinkText 1s infinite;
+    animation: blinkText 1s infinite;
+    animation-direction: alternate; }
   #title p {
     font-size: 32px;
     font-weight: 200; }
@@ -43,12 +46,12 @@ button, select, option, input[type='text'] {
 .fa-plus {
   color: aqua; }
   .fa-plus:hover {
-    color: #38b25c; }
+    text-shadow: 2px 1px #ff701d; }
 
 .fa-ban {
   color: #ff701d; }
   .fa-ban:hover {
-    color: red; }
+    text-shadow: 2px 1px aqua; }
 
 .draggable {
   list-style-type: none;
@@ -90,19 +93,28 @@ input[type='text'] {
   font-size: 32px; }
 
 .submit {
+  width: 20%;
   position: fixed;
-  bottom: 15%;
-  right: 15%;
+  bottom: 5%;
+  right: 5%;
   text-align: center; }
   .submit button {
-    font-size: 48px;
+    border-radius: 5px;
+    font-size: 36px;
+    padding: 3px;
     margin: 0 auto;
     background-color: rgba(255, 255, 255, 0.8);
-    border: solid 2px aqua; }
+    border: solid 2px aqua;
+    -webkit-box-shadow: 1px 2px 1px #ff701d;
+    -moz-box-shadow: 1px 2px 1px #ff701d;
+    box-shadow: 1px 2px 1px #ff701d; }
     .submit button i {
       color: #ff701d; }
     .submit button:hover {
-      border: dashed 2px #ff701d; }
+      border: solid 2px #ff701d;
+      -webkit-box-shadow: 1px 2px 1px aqua;
+      -moz-box-shadow: 1px 2px 1px aqua;
+      box-shadow: 1px 2px 1px aqua; }
       .submit button:hover i {
         color: aqua; }
 
@@ -111,5 +123,19 @@ input[type='text'] {
 
 .experienceGroup {
   border-bottom: solid 1px aqua; }
+
+@-webkit-keyframes blinkText {
+  0% {
+    text-shadow: 1px 0px #ff701d; }
+  100% {
+    text-shadow: 3px 2px aqua; } }
+@keyframes blinkText {
+  0% {
+    text-shadow: 1px 0px #ff701d; }
+  100% {
+    text-shadow: 3px 2px aqua; } }
+@keyframes sheen {
+  100% {
+    transform: rotateZ(60deg) translate(1em, -9em); } }
 
 /*# sourceMappingURL=index.css.map */
