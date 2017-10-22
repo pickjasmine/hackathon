@@ -3,7 +3,9 @@ const app = express();
 const got  = require('got');
 const fs = require('fs');
 const parser = require('body-parser');
-const token = "964c73e3-d289-4cb7-a895-e9ebd1305b1d";
+const mmtoken = "964c73e3-d289-4cb7-a895-e9ebd1305b1d";
+const twilio = require('twilio');
+const IncomingWebhook = require('@slack/client').IncomingWebhook;
 
 app.set('port', 8080);
 app.use(express.static('web-app'));
@@ -50,7 +52,7 @@ async function sendEmail(json) {
   await got.post("https://api.mixmax.com/v1/send", {
     headers: {
       "content-type": "application/json",
-      "X-API-TOKEN": token
+      "X-API-TOKEN": mmtoken
     },
     body: JSON.stringify({
       "message": {
@@ -69,14 +71,24 @@ async function sendEmail(json) {
 
 function testSlack() {
   var WebClient = require('@slack/client').WebClient;
-
+  // var jobList =
   var token = process.env.SLACK_API_TOKEN || 'xoxp-259705158691-259267103377-259294246432-dc346552b350bbca6f64aba3214fee43';
   var web = new WebClient(token);
-  web.chat.postMessage('#random', 'Hello there', function(err, res) {
+  web.chat.postMessage('#joblistings', jobList, function(err, res) {
     if (err) {
       console.log('Error:', err);
     } else {
       console.log('Message sent: ', res);
     }
   });
+}
+
+
+function testTwilio() {
+ var client = new twilio('AC233d913b9e82ceafb883f93e451224d3', '78969c0e712aaedceb1c775c7c86d12d');
+ client.messages.create({
+   to: '+13312628169',
+   from: '+13479675486',
+   body: 'Hello from Twilio!'
+ });
 }
