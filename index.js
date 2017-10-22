@@ -20,34 +20,24 @@ app.post('/submit', function(req, res) {
   // Assumes the following fields are provided
   let location = `${data.location}`;
   let job_type = data.jobType[0].toString();
-  let keywords = data.keywords
+  let keywords = data.keywords;
 
-  while (i < keywords.length) {
-    // No + if there's only one search term
-    if (keywords[i] != undefined) {
-      url += keywords[i];
-      url += "+";
-      i++;
+  if (keywords[0] != undefined) {
+    url += keywords[0];
+    while (i < keywords.length) {
+      if (keywords[i] != undefined) {
+        url += "+" + keywords[i];
+        i++;
+      }
     }
   }
 
-  url+="&"
-  url+="location=" + location
+  url+="&location=" + location
 
   if (data.jobType[0] == "fullTime") {
     url += "&full_time=true"
   }
-
-  console.log(url);
-
-async function all() {
-  await getJobs(url)
-  .then(function(result) {
-    console.log(result);
-    sendEmail(result)
-  })
-}
-  all();
+  getJobs(url).then(function(result) {sendEmail(result)});
 });
 
 app.listen(8080, function() {
@@ -57,9 +47,7 @@ app.listen(8080, function() {
 async function getJobs(url) {
   let json;
   let jobs = [];
-
-  const response = await got(url)
-
+  const response = await got(url);
   let data = JSON.parse(response.body);
   for (let i = 0; i < data.length; i++) {
     let { title, location, company, url } = data[i];
@@ -67,7 +55,6 @@ async function getJobs(url) {
       title, location, company, url
     });
   }
-  console.log(jobs);
   return jobs;
 }
 
