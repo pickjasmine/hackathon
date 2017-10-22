@@ -8,8 +8,6 @@
 body {
   background-image: url(images/stefan-stefancik-257625.jpg);
   background-size: cover;
-  background-repeat: no-repeat;
-  background-position: top center;
   background-color: rgba(0, 0, 0, 0.6);
   background-blend-mode: overlay; }
 
@@ -90,9 +88,10 @@ input[type='text'] {
   font-size: 32px; }
 
 .submit {
+  width: 20%;
   position: fixed;
-  bottom: 15%;
-  right: 15%;
+  bottom: 5%;
+  right: 5%;
   text-align: center; }
   .submit button {
     font-size: 48px;

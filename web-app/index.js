@@ -100,8 +100,10 @@ $(document).ready(function () {
                 containment: '.leftSide',
                 cursor: 'move',
                 helper: 'clone',
-                grid: [30, 30],
-                cursorAt: {top: 0, left: 0}
+                cursorAt: {
+                    left: $(this).width()/2,
+                    top: $(this).height()/2
+                }
             });
         } else {
             $('#keywordInput').val('Sorry, 3 keywords max');
